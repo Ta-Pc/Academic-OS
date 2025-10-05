@@ -1,5 +1,5 @@
-import React, { useState, useCallback, useEffect } from 'react';
-import { SetupStep, FormData, AcademicInfo, SystemSettings, Degree, Module, AcademicTerm, FilterMode } from './types';
+import React, { useState, useCallback, useEffect, useReducer } from 'react';
+import { SetupStep, FormData, AcademicInfo, SystemSettings, Degree, Module, AcademicTerm, FilterMode, InitPhase, InitializationState } from './types';
 import { isWithinInterval, parseISO, startOfDay, format, startOfYear, endOfYear } from 'date-fns';
 import AcademicInfoForm from './components/AcademicInfoForm';
 import ConfirmationStep from './components/ConfirmationStep';
@@ -17,6 +17,8 @@ import { runDailyTasks } from './services/scheduler';
 import * as database from './services/database';
 import * as localStorageUtil from './utils/localStorage';
 import { TermProvider, useTerm } from './components/contexts/TermContext';
+import InitializationScreen from './components/InitializationScreen';
+import FatalErrorScreen from './components/FatalErrorScreen';
 
 const initialAcademicInfo: AcademicInfo = {
   name: '',
@@ -119,6 +121,48 @@ const initialFormData: FormData = {
   systemSettings: initialSystemSettings,
   modules: [],
 };
+
+const PHASE_CONFIG: Record<InitPhase, { message: string; progress: number }> = {
+    [InitPhase.IDLE]: { message: 'Getting ready...', progress: 0 },
+    [InitPhase.CHECKING_ENVIRONMENT]: { message: 'Verifying browser environment...', progress: 10 },
+    [InitPhase.CHECKING_SETUP_STATUS]: { message: 'Checking setup status...', progress: 20 },
+    [InitPhase.INITIALIZING_SQL]: { message: 'Initializing database engine...', progress: 30 },
+    [InitPhase.LOADING_DATABASE]: { message: 'Loading your data...', progress: 50 },
+    [InitPhase.CHECKING_DB_VERSION]: { message: 'Verifying database version...', progress: 60 },
+    [InitPhase.HYDRATING_DATA]: { message: 'Populating application state...', progress: 80 },
+    [InitPhase.READY]: { message: 'Ready!', progress: 100 },
+    [InitPhase.FATAL_ERROR]: { message: 'An unrecoverable error occurred.', progress: 0 },
+    [InitPhase.SETUP_REQUIRED]: { message: 'Setup required.', progress: 100 },
+};
+
+const initialInitState: InitializationState = {
+    phase: InitPhase.IDLE,
+    message: PHASE_CONFIG[InitPhase.IDLE].message,
+    progress: PHASE_CONFIG[InitPhase.IDLE].progress,
+};
+
+type InitAction = 
+  | { type: InitPhase.FATAL_ERROR; payload: { title: string; description: string } }
+  | { type: Exclude<InitPhase, InitPhase.FATAL_ERROR> };
+
+function initializationReducer(state: InitializationState, action: InitAction): InitializationState {
+  const config = PHASE_CONFIG[action.type];
+  if (action.type === InitPhase.FATAL_ERROR) {
+    return {
+      ...state,
+      phase: InitPhase.FATAL_ERROR,
+      message: config.message,
+      progress: config.progress,
+      error: action.payload,
+    };
+  }
+  return {
+    ...state,
+    phase: action.type,
+    message: config.message,
+    progress: config.progress,
+  };
+}
 
 /**
  * A pure function that performs the full "roll-up" calculation of all analytics.
@@ -288,62 +332,93 @@ const AppViews: React.FC<{
 
 
 const App: React.FC = () => {
-  const [isSetupComplete, setIsSetupComplete] = useState<boolean>(false);
   const [step, setStep] = useState<SetupStep>(SetupStep.AcademicInfo);
   const [formData, setFormData] = useState<FormData>(initialFormData);
-  const [loading, setLoading] = useState<boolean>(true);
   const [view, setView] = useState<{ name: string; params: Record<string, any> }>({ name: 'dashboard', params: {} });
   const [appToast, setAppToast] = useState<string | null>(null);
   const [filterMode, setFilterMode] = useState<FilterMode>('smart');
+  const [initState, dispatchInit] = useReducer(initializationReducer, initialInitState);
 
 
   // Load UI preferences from localStorage and core data from SQLite on startup
   useEffect(() => {
-    async function loadData() {
-      setLoading(true);
+    async function startup() {
+      // Phase 1: Check Environment
+      dispatchInit({ type: InitPhase.CHECKING_ENVIRONMENT });
+      await new Promise(resolve => setTimeout(resolve, 250)); // UI delay
+      
       try {
-        // Check setupComplete flag in localStorage
-        const setupCompleteFlag = localStorageUtil.getSetupCompleteFlag();
-        console.debug('Setup complete flag:', setupCompleteFlag);
-        if (setupCompleteFlag === 'true') {
-          // Load core data from SQLite
-          const coreData = await database.getAllCoreData();
-          const dashboardSettings = await database.getDashboardSettings();
-          if (dashboardSettings) {
-            setFilterMode(dashboardSettings.default_filter_mode);
-          }
-          console.debug('Core data loaded:', coreData);
-          if (coreData.degree.id) {
-            // Perform initial full calculation
-            const calculatedData = performFullCalculation(coreData);
-            setFormData(calculatedData);
-            setIsSetupComplete(true);
-            setStep(SetupStep.Building); // Skip setup wizard
-          } else {
-            // No data found, fallback to setup wizard
-            setIsSetupComplete(false);
-            setStep(SetupStep.AcademicInfo);
-            setFormData(prev => ({
-              ...prev,
-              systemSettings: { ...prev.systemSettings, ...localStorageUtil.getSystemSettings() }
-            }));
-          }
-        } else {
-          // Setup not complete, proceed with setup wizard
-          setIsSetupComplete(false);
-          setStep(SetupStep.AcademicInfo);
-          setFormData(prev => ({
-            ...prev,
-            systemSettings: { ...prev.systemSettings, ...localStorageUtil.getSystemSettings() }
-          }));
+        if (typeof localStorage === 'undefined') {
+          throw new Error('localStorage is not available.');
         }
-      } catch (error) {
-        console.error('Error loading data from database:', error);
-      } finally {
-        setLoading(false);
+        // Test if we can write to localStorage
+        localStorage.setItem('__test', '1');
+        localStorage.removeItem('__test');
+      } catch (e) {
+        dispatchInit({
+          type: InitPhase.FATAL_ERROR,
+          payload: {
+            title: 'Environment Error',
+            description: 'Your browser does not support essential features (like localStorage) or has them disabled (e.g., in private browsing).\n\nPlease use a modern, non-private browser window to use this application.',
+          },
+        });
+        return; // Halt execution
+      }
+
+      // Phase 2: Check Setup Status
+      dispatchInit({ type: InitPhase.CHECKING_SETUP_STATUS });
+      await new Promise(resolve => setTimeout(resolve, 250));
+      
+      const setupCompleteFlag = localStorageUtil.getSetupCompleteFlag();
+
+      if (setupCompleteFlag === 'true') {
+        // Path for returning user
+        dispatchInit({ type: InitPhase.LOADING_DATABASE });
+        await new Promise(resolve => setTimeout(resolve, 500));
+        
+        try {
+            const coreData = await database.getAllCoreData();
+            const dashboardSettings = await database.getDashboardSettings();
+            if (dashboardSettings) {
+                setFilterMode(dashboardSettings.default_filter_mode);
+            }
+            console.debug('Core data loaded:', coreData);
+
+            dispatchInit({ type: InitPhase.HYDRATING_DATA });
+            await new Promise(resolve => setTimeout(resolve, 500));
+
+            if (coreData.degree.id) {
+                const calculatedData = performFullCalculation(coreData);
+                setFormData(calculatedData);
+                dispatchInit({ type: InitPhase.READY });
+            } else {
+                 // Data is corrupt or missing, treat as fresh setup
+                 setFormData(prev => ({
+                    ...prev,
+                    systemSettings: { ...prev.systemSettings, ...localStorageUtil.getSystemSettings() }
+                }));
+                dispatchInit({ type: InitPhase.SETUP_REQUIRED });
+            }
+        } catch (error) {
+            console.error('Error loading data from database:', error);
+            dispatchInit({
+                type: InitPhase.FATAL_ERROR,
+                payload: {
+                    title: 'Database Load Failed',
+                    description: `There was a problem loading your data. The database might be corrupted.\n\nError: ${error instanceof Error ? error.message : 'Unknown error'}`,
+                },
+            });
+        }
+      } else {
+        // Path for first-time setup
+        setFormData(prev => ({
+          ...prev,
+          systemSettings: { ...prev.systemSettings, ...localStorageUtil.getSystemSettings() }
+        }));
+        dispatchInit({ type: InitPhase.SETUP_REQUIRED });
       }
     }
-    loadData();
+    startup();
   }, []);
 
   useEffect(() => {
@@ -369,7 +444,7 @@ const App: React.FC = () => {
   // Save core data to SQLite whenever formData changes and setup is complete
   useEffect(() => {
     async function saveData() {
-      if (!isSetupComplete) return;
+      if (initState.phase !== InitPhase.READY) return;
       try {
         await database.saveAcademicInfo(formData.academicInfo);
         await database.saveDegree(formData.degree);
@@ -388,7 +463,7 @@ const App: React.FC = () => {
       }
     }
     saveData();
-  }, [formData, isSetupComplete]);
+  }, [formData, initState.phase]);
 
   const updateFormData = useCallback(<K extends keyof FormData>(section: K, data: FormData[K]) => {
     setFormData(prev => ({ ...prev, [section]: data }));
@@ -498,13 +573,13 @@ const App: React.FC = () => {
   // This effect serves as the primary REAL-TIME trigger for the analytics engine.
   // It only runs AFTER the initial setup is complete.
   useEffect(() => {
-    if (isSetupComplete && formData.modules.length > 0) {
+    if (initState.phase === InitPhase.READY && formData.modules.length > 0) {
         recalculateAllAnalytics();
     }
   // The recalculateAllAnalytics function is memoized and contains a deep check
   // to prevent unnecessary state updates and infinite loops.
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isSetupComplete, formData.importedAssessments, formData.modules]);
+  }, [initState.phase, formData.importedAssessments, formData.modules]);
 
   // This effect handles the one-time BATCH calculation at the end of setup.
   useEffect(() => {
@@ -518,7 +593,7 @@ const App: React.FC = () => {
             });
             
             // Mark setup as complete, which will trigger the transition to the dashboard.
-            setIsSetupComplete(true);
+            dispatchInit({ type: InitPhase.READY });
         }, 2000); // 2-second delay for the loading animation
 
         return () => clearTimeout(timer);
@@ -568,7 +643,7 @@ const App: React.FC = () => {
 
   const resetSetup = useCallback(() => {
     // This is ONLY for cancelling during the setup wizard.
-    setIsSetupComplete(false);
+    dispatchInit({ type: InitPhase.SETUP_REQUIRED });
     setStep(SetupStep.AcademicInfo);
     setFormData(initialFormData);
     setView({ name: 'dashboard', params: {} });
@@ -586,7 +661,7 @@ const App: React.FC = () => {
 
   // Daily background tasks check on app startup
   useEffect(() => {
-    if (!isSetupComplete) return;
+    if (initState.phase !== InitPhase.READY) return;
 
     const lastRun = localStorage.getItem('lastDailyRun');
     const today = new Date().toDateString();
@@ -598,7 +673,7 @@ const App: React.FC = () => {
         return updatedFormData;
       });
     }
-  }, [isSetupComplete]);
+  }, [initState.phase]);
 
   const handleFilterModeChange = useCallback(async (mode: FilterMode) => {
     setFilterMode(mode);
@@ -618,12 +693,15 @@ const App: React.FC = () => {
     setView({ name: 'settings', params: { initialTab } });
   };
 
+  if (initState.phase === InitPhase.FATAL_ERROR) {
+    return <FatalErrorScreen title={initState.error!.title} description={initState.error!.description} />;
+  }
 
-  if (loading) {
-    return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
+  if (initState.phase !== InitPhase.READY && initState.phase !== InitPhase.SETUP_REQUIRED) {
+      return <InitializationScreen state={initState} />;
   }
   
-  if (isSetupComplete) {
+  if (initState.phase === InitPhase.READY) {
       const allDisplayableTerms = getAllTermsWithYears(formData.degree.terms);
       return (
           <TermProvider terms={allDisplayableTerms}>

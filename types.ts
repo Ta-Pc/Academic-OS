@@ -8,6 +8,29 @@ export enum SetupStep {
   Complete,
 }
 
+export enum InitPhase {
+  IDLE,
+  CHECKING_ENVIRONMENT,
+  CHECKING_SETUP_STATUS,
+  INITIALIZING_SQL,
+  LOADING_DATABASE,
+  CHECKING_DB_VERSION,
+  HYDRATING_DATA,
+  READY,
+  FATAL_ERROR,
+  SETUP_REQUIRED,
+}
+
+export interface InitializationState {
+  phase: InitPhase;
+  message: string;
+  progress: number;
+  error?: {
+    title: string;
+    description: string;
+  };
+}
+
 export type DegreeStatus = 'In Progress' | 'Completed' | 'On Hold' | 'Planned';
 export type FilterMode = 'broad' | 'focused' | 'strict' | 'smart';
 export type TermType = 'Year' | 'Semester' | 'Quarter';
