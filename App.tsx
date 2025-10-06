@@ -628,15 +628,8 @@ const App: React.FC = () => {
   }, [handleNextStep]);
 
   const handleFinalSubmit = useCallback(async () => {
-      // The new calendar data is already in formData state, so we just need to save it all.
+      // The new calendar data is already in formData state, so calculations will be performed next.
       console.log('Final setup data (pre-calculation):', formData);
-      try {
-        await database.saveAcademicInfo(formData.academicInfo);
-        await database.saveDegree(formData.degree);
-        // Modules and assessments are saved at the building step, but terms are part of degree.
-      } catch (error) {
-          console.error("Error during pre-build save:", error);
-      }
       localStorageUtil.setSetupCompleteFlag('true');
       setStep(SetupStep.Building);
   }, [formData]);

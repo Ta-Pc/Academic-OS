@@ -236,14 +236,14 @@ async function createTablesV2() {
   `);
 }
 
-export async function rebuildTermClosureTable() {
+async function rebuildTermClosureTable() {
     if (!db) await initDatabase();
     if (!db) return;
     console.log('[Database] Rebuilding term closure table...');
 
     db.run('DELETE FROM TermClosure');
     const terms = await getAllTerms();
-    
+
     const adj: Record<string, string[]> = {};
     for (const term of terms) {
         if (term.parentTermId) {
@@ -251,11 +251,18 @@ export async function rebuildTermClosureTable() {
             adj[term.parentTermId].push(term.id);
         }
     }
-    
-    const stmt = db.prepare('INSERT INTO TermClosure (ancestorId, descendantId, depth) VALUES (?, ?, ?)');
+
+    // Collect all unique ancestor-descendant-depth triples
+    const pairs = new Map<string, Map<string, number>>(); // ancestorId -> (descendantId -> depth)
 
     function traverse(ancestorId: string, currentId: string, depth: number) {
-        stmt.run([ancestorId, currentId, depth]);
+        if (!pairs.has(ancestorId)) {
+            pairs.set(ancestorId, new Map());
+        }
+        const descMap = pairs.get(ancestorId)!;
+        if (!descMap.has(currentId) || descMap.get(currentId)! > depth) {
+            descMap.set(currentId, depth);
+        }
         if (adj[currentId]) {
             for (const childId of adj[currentId]) {
                 traverse(ancestorId, childId, depth + 1);
@@ -266,8 +273,16 @@ export async function rebuildTermClosureTable() {
     for (const term of terms) {
         traverse(term.id, term.id, 0);
     }
-    
+
+    // Insert all collected pairs
+    const stmt = db.prepare('INSERT INTO TermClosure (ancestorId, descendantId, depth) VALUES (?, ?, ?)');
+    for (const [ancestorId, descMap] of pairs) {
+        for (const [descendantId, depth] of descMap) {
+            stmt.run([ancestorId, descendantId, depth]);
+        }
+    }
     stmt.free();
+
     console.log('[Database] Term closure table rebuilt.');
     saveDatabase();
 }

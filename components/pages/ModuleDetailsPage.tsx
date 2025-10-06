@@ -173,6 +173,7 @@ const ModuleDetailsPage: React.FC<Props> = ({ module, moduleAssessments, allAsse
         allModules={allModules}
         allTerms={allTerms}
         allAssessments={allAssessments}
+        activeTermId={allTerms.length > 0 ? allTerms[0].id : undefined}
       />
 
       {isArchiveModalOpen && (

@@ -9,7 +9,7 @@ import GlobalHeader from './dashboard/GlobalHeader';
 // FIX: Explicitly import from the .tsx file to resolve ambiguity with a similarly named .ts file.
 import ModulesOverviewControls, { SortKey, Filters, StatusFilter, initialFilters, FilterMode } from './dashboard/ModulesOverviewControls.tsx';
 import { getDashboardPreferences, setDashboardPreferences, DashboardPreferences } from '../utils/localStorage';
-import EditModuleDrawer from './details/EditModuleDrawer.tsx';
+import CreateModuleDrawer from './details/CreateModuleDrawer.tsx';
 import Toast from './Toast';
 import { useTerm } from './contexts/TermContext';
 import * as database from '../services/database';
@@ -202,11 +202,6 @@ const Dashboard: React.FC<{
         return { currentTerm: term, modulesInTerm: modules, assessmentsInTerm: assessments };
     }, [activeTermId, formData.degree.terms, formData.modules, formData.importedAssessments, filterMode]);
 
-    // If there's no data at all, show a welcome/empty state.
-    if (!isLoading && formData.modules.length === 0 && formData.importedAssessments.length === 0) {
-        return <EmptyState onReset={onReset} onAddModule={handleOpenAddModule} />;
-    }
-
     // Filter and sort modules
     const activeModules = useMemo(() => {
         if (!currentTerm) return [];
@@ -273,6 +268,11 @@ const Dashboard: React.FC<{
         }
     }, [activeModules]);
 
+    // If there's no data at all, show a welcome/empty state.
+    if (!isLoading && formData.modules.length === 0 && formData.importedAssessments.length === 0) {
+        // Move this early return after all hooks are declared to fix "fewer hooks" error
+        return <EmptyState onReset={onReset} onAddModule={handleOpenAddModule} />;
+    }
 
     // Keyboard navigation for the grid
     const handleGridKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
@@ -406,13 +406,12 @@ const Dashboard: React.FC<{
                 />
             )}
 
-            <EditModuleDrawer
+            <CreateModuleDrawer
                 isOpen={isAddModuleDrawerOpen}
                 onClose={() => setIsAddModuleDrawerOpen(false)}
                 onSave={handleSaveNewModule}
                 allModules={formData.modules}
                 allTerms={formData.degree.terms}
-                allAssessments={formData.importedAssessments}
                 activeTermId={activeTermId}
             />
         </div>

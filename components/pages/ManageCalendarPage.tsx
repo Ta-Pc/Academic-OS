@@ -247,28 +247,25 @@ const ManageCalendarPage: React.FC<Props> = ({
 
                     return (
                         <div key={year} className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden transition-all duration-300">
-                            <button
-                                onClick={() => setExpandedYear(isExpanded ? null : year)}
-                                className="w-full text-left p-6 hover:bg-slate-50 dark:hover:bg-slate-700/50"
-                                aria-expanded={isExpanded}
-                            >
+                            <div className="p-6 hover:bg-slate-50 dark:hover:bg-slate-700/50">
                                 <div className="flex justify-between items-center">
-                                    <span className="text-lg font-bold text-slate-900 dark:text-slate-100">{year}</span>
-                                    <div className="flex items-center gap-4">
-                                        <button
-                                            onClick={(e) => {
-                                                e.stopPropagation();
-                                                handleDeleteYearAttempt(year);
-                                            }}
-                                            className="text-slate-500 hover:text-red-600 dark:hover:text-red-500 transition-colors"
-                                            aria-label={`Delete ${year} academic year`}
-                                        >
-                                            <Icon name="Trash2" className="w-5 h-5" strokeWidth={1.5} />
-                                        </button>
+                                    <button
+                                        onClick={() => setExpandedYear(isExpanded ? null : year)}
+                                        className="flex-1 text-left"
+                                        aria-expanded={isExpanded}
+                                    >
+                                        <span className="text-lg font-bold text-slate-900 dark:text-slate-100">{year}</span>
                                         <Icon name="ChevronDown" className={`w-5 h-5 text-slate-500 dark:text-slate-400 transition-transform ${isExpanded ? 'rotate-180' : ''}`} strokeWidth={2} />
-                                    </div>
+                                    </button>
+                                    <button
+                                        onClick={() => handleDeleteYearAttempt(year)}
+                                        className="text-slate-500 hover:text-red-600 dark:hover:text-red-500 transition-colors"
+                                        aria-label={`Delete ${year} academic year`}
+                                    >
+                                        <Icon name="Trash2" className="w-5 h-5" strokeWidth={1.5} />
+                                    </button>
                                 </div>
-                            </button>
+                            </div>
 
                             {isExpanded && (
                                 <div className="p-6 border-t border-slate-200 dark:border-slate-700 animate-fade-in">
