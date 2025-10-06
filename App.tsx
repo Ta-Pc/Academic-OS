@@ -41,68 +41,38 @@ const initialDegree: Degree = {
     terms: [],
 };
 
-const UP_2025_TEMPLATE: AcademicTerm[] = [
-  {
-    id: 'up-2025-sem1',
-    academicYear: 2025,
-    parentTermId: null,
-    termName: 'Semester 1',
-    startDate: '2025-02-10',
-    endDate: '2025-05-29',
-    durationInWeeks: 15,
-    notionalHoursPerCredit: 10,
-  },
-  {
-    id: 'up-2025-q1',
-    academicYear: 2025,
-    parentTermId: 'up-2025-sem1',
-    termName: 'Quarter 1',
-    startDate: '2025-02-10',
-    endDate: '2025-03-31',
-    durationInWeeks: 7,
-    notionalHoursPerCredit: 10,
-  },
-  {
-    id: 'up-2025-q2',
-    academicYear: 2025,
-    parentTermId: 'up-2025-sem1',
-    termName: 'Quarter 2',
-    startDate: '2025-04-01',
-    endDate: '2025-05-29',
-    durationInWeeks: 8,
-    notionalHoursPerCredit: 10,
-  },
-  {
-    id: 'up-2025-sem2',
-    academicYear: 2025,
-    parentTermId: null,
-    termName: 'Semester 2',
-    startDate: '2025-07-21',
-    endDate: '2025-11-06',
-    durationInWeeks: 15,
-    notionalHoursPerCredit: 10,
-  },
-  {
-    id: 'up-2025-q3',
-    academicYear: 2025,
-    parentTermId: 'up-2025-sem2',
-    termName: 'Quarter 3',
-    startDate: '2025-07-21',
-    endDate: '2025-09-05',
-    durationInWeeks: 7,
-    notionalHoursPerCredit: 10,
-  },
-  {
-    id: 'up-2025-q4',
-    academicYear: 2025,
-    parentTermId: 'up-2025-sem2',
-    termName: 'Quarter 4',
-    startDate: '2025-09-08',
-    endDate: '2025-11-06',
-    durationInWeeks: 8,
-    notionalHoursPerCredit: 10,
-  },
-];
+const generateDefaultCalendar = (): AcademicTerm[] => {
+  const template = [
+    { placeholderId: 'sem1', academicYear: 2025, parentPlaceholderId: null, termName: 'Semester 1', startDate: '2025-02-10', endDate: '2025-05-29', durationInWeeks: 15, notionalHoursPerCredit: 10 },
+    { placeholderId: 'q1', academicYear: 2025, parentPlaceholderId: 'sem1', termName: 'Quarter 1', startDate: '2025-02-10', endDate: '2025-03-31', durationInWeeks: 7, notionalHoursPerCredit: 10 },
+    { placeholderId: 'q2', academicYear: 2025, parentPlaceholderId: 'sem1', termName: 'Quarter 2', startDate: '2025-04-01', endDate: '2025-05-29', durationInWeeks: 8, notionalHoursPerCredit: 10 },
+    { placeholderId: 'sem2', academicYear: 2025, parentPlaceholderId: null, termName: 'Semester 2', startDate: '2025-07-21', endDate: '2025-11-06', durationInWeeks: 15, notionalHoursPerCredit: 10 },
+    { placeholderId: 'q3', academicYear: 2025, parentPlaceholderId: 'sem2', termName: 'Quarter 3', startDate: '2025-07-21', endDate: '2025-09-05', durationInWeeks: 7, notionalHoursPerCredit: 10 },
+    { placeholderId: 'q4', academicYear: 2025, parentPlaceholderId: 'sem2', termName: 'Quarter 4', startDate: '2025-09-08', endDate: '2025-11-06', durationInWeeks: 8, notionalHoursPerCredit: 10 },
+  ];
+
+  const idMap = new Map<string, string>();
+  
+  // First pass: generate new IDs and create a map of placeholder -> new ID
+  template.forEach(term => {
+    const newId = `term-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
+    idMap.set(term.placeholderId, newId);
+  });
+
+  // Second pass: build final term objects using the new IDs
+  const newTerms: AcademicTerm[] = template.map(t => ({
+    id: idMap.get(t.placeholderId)!,
+    academicYear: t.academicYear,
+    parentTermId: t.parentPlaceholderId ? idMap.get(t.parentPlaceholderId) : null,
+    termName: t.termName,
+    startDate: t.startDate,
+    endDate: t.endDate,
+    durationInWeeks: t.durationInWeeks,
+    notionalHoursPerCredit: t.notionalHoursPerCredit,
+  }));
+
+  return newTerms;
+};
 
 
 const initialSystemSettings: SystemSettings = {
@@ -613,12 +583,12 @@ const App: React.FC = () => {
     setFormData(prev => {
         // If the user has not configured any terms yet, provide a default template.
         if (prev.degree.terms.length === 0) {
-            console.log("No terms found for setup, applying default UP 2025 template.");
+            console.log("No terms found for setup, applying default calendar template.");
             return {
                 ...prev,
                 degree: {
                     ...prev.degree,
-                    terms: UP_2025_TEMPLATE
+                    terms: generateDefaultCalendar()
                 }
             };
         }
@@ -710,6 +680,7 @@ const App: React.FC = () => {
                   onNavigateToSettings={handleNavigateToSettings}
                   onAddModule={addModule}
                   appToast={appToast}
+                  // FIX: Pass the `onClearToast` handler to the Dashboard correctly.
                   onClearToast={() => setAppToast(null)}
                   updateFormData={updateFormData}
                   updateModules={updateModules}
