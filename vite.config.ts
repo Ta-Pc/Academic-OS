@@ -21,6 +21,20 @@ export default defineConfig(({ mode }) => {
           // FIX: `__dirname` is not available in ES modules. Using `process.cwd()` to resolve the project root.
           '@': path.resolve(process.cwd(), '.'),
         }
+      },
+      assetsInclude: ['**/*.wasm'],
+      build: {
+        rollupOptions: {
+          output: {
+            // Ensure .wasm files are copied to the output directory
+            assetFileNames: (assetInfo) => {
+              if (assetInfo.name && assetInfo.name.endsWith('.wasm')) {
+                return 'assets/[name][extname]';
+              }
+              return 'assets/[name]-[hash][extname]';
+            }
+          }
+        }
       }
     };
 });
