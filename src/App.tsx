@@ -19,6 +19,7 @@ import * as localStorageUtil from './legacy/utils/localStorage';
 import { TermProvider, useTerm } from './legacy/components/contexts/TermContext';
 import InitializationScreen from './legacy/components/InitializationScreen';
 import FatalErrorScreen from './legacy/components/FatalErrorScreen';
+import { testRepositories } from './test-repositories';
 
 const initialAcademicInfo: AcademicInfo = {
   name: '',
@@ -656,6 +657,10 @@ const App: React.FC = () => {
     setView({ name: 'settings', params: { initialTab } });
   };
 
+  const runRepoTests = () => {
+    testRepositories().catch(console.error);
+  };
+
   if (initState.phase === InitPhase.FATAL_ERROR) {
     return <FatalErrorScreen title={initState.error!.title} description={initState.error!.description} />;
   }
@@ -667,27 +672,35 @@ const App: React.FC = () => {
   if (initState.phase === InitPhase.READY) {
       const allDisplayableTerms = getAllTermsWithYears(formData.degree.terms);
       return (
-          <TermProvider terms={allDisplayableTerms}>
-              <AppViews
-                  view={view}
-                  formData={formData}
-                  handleReturnToDashboard={handleReturnToDashboard}
-                  updateModule={updateModule}
-                  deleteModule={deleteModule}
-                  onReset={handleResetApplication}
-                  onModuleClick={handleSelectModule}
-                  onNavigateToTermNavigator={handleNavigateToTermNavigator}
-                  onNavigateToSettings={handleNavigateToSettings}
-                  onAddModule={addModule}
-                  appToast={appToast}
-                  // FIX: Pass the `onClearToast` handler to the Dashboard correctly.
-                  onClearToast={() => setAppToast(null)}
-                  updateFormData={updateFormData}
-                  updateModules={updateModules}
-                  filterMode={filterMode}
-                  onFilterModeChange={handleFilterModeChange}
-              />
-          </TermProvider>
+          <>
+              <TermProvider terms={allDisplayableTerms}>
+                  <AppViews
+                      view={view}
+                      formData={formData}
+                      handleReturnToDashboard={handleReturnToDashboard}
+                      updateModule={updateModule}
+                      deleteModule={deleteModule}
+                      onReset={handleResetApplication}
+                      onModuleClick={handleSelectModule}
+                      onNavigateToTermNavigator={handleNavigateToTermNavigator}
+                      onNavigateToSettings={handleNavigateToSettings}
+                      onAddModule={addModule}
+                      appToast={appToast}
+                      // FIX: Pass the `onClearToast` handler to the Dashboard correctly.
+                      onClearToast={() => setAppToast(null)}
+                      updateFormData={updateFormData}
+                      updateModules={updateModules}
+                      filterMode={filterMode}
+                      onFilterModeChange={handleFilterModeChange}
+                  />
+              </TermProvider>
+              <button
+                  onClick={runRepoTests}
+                  className="fixed bottom-4 right-4 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded shadow-lg z-50"
+              >
+                  Test Repositories
+              </button>
+          </>
       );
   }
 
