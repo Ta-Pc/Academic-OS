@@ -1,10 +1,9 @@
-import { Module } from '../../types';
+import { Module } from '../../core/domain/models/Module';
 
 export class ModuleMapper {
-  static toDomain(row: any): Module & { id: string } {
+  static toDomain(row: any): Module {
     console.log('ModuleMapper.toDomain raw row:', row);
-    const moduleObject = {
-      id: row.offeringId,
+    const data = {
       offeringId: row.offeringId,
       moduleId: row.moduleId,
       moduleCode: row.moduleCode,
@@ -33,8 +32,8 @@ export class ModuleMapper {
       calculated_weekly_time_spent: row.calculated_weekly_time_spent,
     };
 
-    console.log("ModuleMapper.toDomain MAPPED OBJECT:", moduleObject);
+    console.log("ModuleMapper.toDomain MAPPED OBJECT:", data);
 
-    return moduleObject;
+    return new Module(data);
   }
 }

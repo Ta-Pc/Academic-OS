@@ -1,8 +1,8 @@
-import { Assessment } from '../../types';
+import { Assessment } from '../../core/domain/models/Assessment';
 
 export class AssessmentMapper {
   static toDomain(row: any): Assessment {
-    return {
+    const data = {
       id: row.id,
       moduleCode: row.moduleCode,
       assessmentName: row.assessmentName,
@@ -14,5 +14,7 @@ export class AssessmentMapper {
       effort: row.effort,
       calculated_priority_score: row.calculated_priority_score,
     };
+
+    return new Assessment(data);
   }
 }

@@ -1,8 +1,8 @@
-import { AcademicTerm } from '../../types';
+import { Term } from '../../core/domain/models/Term';
 
 export class TermMapper {
-  static toDomain(row: any): AcademicTerm {
-    return {
+  static toDomain(row: any): Term {
+    const data = {
       id: row.id,
       parentTermId: row.parentTermId,
       academicYear: row.academicYear,
@@ -19,5 +19,7 @@ export class TermMapper {
       calculated_cumulative_points_secured: row.calculated_cumulative_points_secured,
       calculated_term_navigator_data: row.calculated_term_navigator_data ? JSON.parse(row.calculated_term_navigator_data) : undefined,
     };
+
+    return new Term(data);
   }
 }

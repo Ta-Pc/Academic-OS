@@ -67,6 +67,9 @@ export class SQLiteManager {
       throw new DatabaseError('Database not loaded');
     }
 
+    // ADD THIS LINE FOR DEBUGGING:
+    console.log('[SQLiteManager] Executing Query:', sql, 'WITH PARAMS:', params);
+
     try {
       const stmt = this.db.prepare(sql);
       const results: any[] = [];
