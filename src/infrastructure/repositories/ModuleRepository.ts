@@ -1,28 +1,28 @@
 import { BaseRepository } from './base/BaseRepository';
-import { Module } from '../../types';
+import { Module } from '../../core/domain/models/Module';
 import { ModuleMapper } from '../mappers/ModuleMapper';
 import { SQLiteManager } from '../storage/sqlite/SQLiteManager';
 import { CacheManager } from '../storage/cache/CacheManager';
 
-export class ModuleRepository extends BaseRepository<Module & { id: string }, string> {
+export class ModuleRepository extends BaseRepository<Module, string> {
   constructor(sqliteManager: SQLiteManager, cacheManager: CacheManager) {
     super(sqliteManager, cacheManager, 'ModuleOffering');
   }
 
-  protected mapRowToEntity(row: any): Module & { id: string } {
+  protected mapRowToEntity(row: any): Module {
     return ModuleMapper.toDomain(row);
   }
 
-  protected mapEntityToRow(entity: Module & { id: string }): any {
+  protected mapEntityToRow(entity: Module): any {
     throw new Error('Write operations are not supported in read-only repository');
   }
 
   public async findByTermId(termId: string): Promise<Module[]> {
     const query = `
-      SELECT 
-        m.id as moduleId, 
-        m.moduleCode, 
-        m.moduleName, 
+      SELECT
+        m.id as moduleId,
+        m.moduleCode,
+        m.moduleName,
         m.credits,
         m.moduleType,
         m.minFinalGrade,
@@ -44,7 +44,7 @@ export class ModuleRepository extends BaseRepository<Module & { id: string }, st
     return rows.map(row => this.mapRowToEntity(row));
   }
 
-  public async findAll(): Promise<(Module & { id: string })[]> {
+  public async findAll(): Promise<Module[]> {
     const query = `
       SELECT 
         m.id as moduleId, 
