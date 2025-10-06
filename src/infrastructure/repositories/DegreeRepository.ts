@@ -1,5 +1,5 @@
 import { BaseRepository } from './base/BaseRepository';
-import { Degree } from '../../types';
+import { Degree } from '../../core/domain/models/Degree';
 import { DegreeMapper } from '../mappers/DegreeMapper';
 import { SQLiteManager } from '../storage/sqlite/SQLiteManager';
 import { CacheManager } from '../storage/cache/CacheManager';

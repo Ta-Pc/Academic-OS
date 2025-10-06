@@ -17,4 +17,19 @@ export class AssessmentMapper {
 
     return new Assessment(data);
   }
+
+  static toPersistence(assessment: Assessment): any {
+    return {
+      id: assessment.id,
+      moduleCode: assessment.moduleCode.value,
+      assessmentName: assessment.assessmentName,
+      assessmentType: assessment.assessmentType,
+      weight: assessment.weight,
+      dueDate: assessment.dueDate,
+      status: assessment.status,
+      result: assessment.result?.value,
+      effort: assessment.effort,
+      calculated_priority_score: assessment.calculated_priority_score,
+    };
+  }
 }

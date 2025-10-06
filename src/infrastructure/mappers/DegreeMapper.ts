@@ -25,4 +25,25 @@ export class DegreeMapper {
 
     return new Degree(data);
   }
+
+  static toPersistence(degree: Degree): any {
+    return {
+      id: degree.id,
+      degreeName: degree.degreeName,
+      institutionName: degree.institutionName,
+      specialization: degree.specialization,
+      nqfLevel: degree.nqfLevel,
+      duration: degree.duration,
+      totalCreditsToGraduate: degree.totalCreditsToGraduate,
+      status: degree.status,
+      startDate: degree.startDate,
+      expectedEndDate: degree.expectedEndDate,
+      calculated_total_registered_credits: degree.calculated_total_registered_credits,
+      calculated_credits_per_year: degree.calculated_credits_per_year ? JSON.stringify(degree.calculated_credits_per_year) : null,
+      calculated_credits_per_term: degree.calculated_credits_per_term ? JSON.stringify(degree.calculated_credits_per_term) : null,
+      calculated_total_earned_credits: degree.calculated_total_earned_credits,
+      calculated_degree_progress_percent: degree.calculated_degree_progress_percent,
+      calculated_overall_gpa: degree.calculated_overall_gpa,
+    };
+  }
 }

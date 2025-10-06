@@ -19,7 +19,7 @@ import * as localStorageUtil from './legacy/utils/localStorage';
 import { TermProvider, useTerm } from './legacy/components/contexts/TermContext';
 import InitializationScreen from './legacy/components/InitializationScreen';
 import FatalErrorScreen from './legacy/components/FatalErrorScreen';
-import { testRepositories } from './test-repositories';
+import { runTests } from './test-harness';
 
 const initialAcademicInfo: AcademicInfo = {
   name: '',
@@ -658,7 +658,7 @@ const App: React.FC = () => {
   };
 
   const runRepoTests = () => {
-    testRepositories().catch(console.error);
+    runTests().catch(console.error);
   };
 
   if (initState.phase === InitPhase.FATAL_ERROR) {
@@ -698,7 +698,7 @@ const App: React.FC = () => {
                   onClick={runRepoTests}
                   className="fixed bottom-4 right-4 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded shadow-lg z-50"
               >
-                  Test Repositories
+                  Run Test Engine
               </button>
           </>
       );
