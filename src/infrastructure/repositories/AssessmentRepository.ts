@@ -1,5 +1,5 @@
 import { BaseRepository } from './base/BaseRepository';
-import { Assessment } from '../../types';
+import { Assessment } from '../../core/domain/models/Assessment';
 import { AssessmentMapper } from '../mappers/AssessmentMapper';
 import { SQLiteManager } from '../storage/sqlite/SQLiteManager';
 import { CacheManager } from '../storage/cache/CacheManager';
@@ -17,8 +17,9 @@ export class AssessmentRepository extends BaseRepository<Assessment, string> {
     throw new Error('Write operations are not supported in read-only repository');
   }
 
-  public async findByModuleCode(moduleCode: string): Promise<Assessment[]> {
-    const rows = this.sqliteManager.query('SELECT * FROM Assessment WHERE moduleCode = ?', [moduleCode]);
+  public async findByModuleCode(moduleCode: string | { value: string }): Promise<Assessment[]> {
+    const code = typeof moduleCode === 'string' ? moduleCode : moduleCode.value;
+    const rows = this.sqliteManager.query('SELECT * FROM Assessment WHERE moduleCode = ?', [code]);
     return rows.map(row => this.mapRowToEntity(row));
   }
 }
