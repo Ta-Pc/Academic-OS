@@ -1,3 +1,3 @@
-- [x] Fix TermSelector props in CreateModuleDrawer.tsx
-- [x] Fix TermSelector props in EditModuleDrawer.tsx
-- [ ] Test the fix by running the app
+- [x] Refactor MigrationRunner.ts: Remove fs and path imports, make loadMigrations async, use import.meta.glob for migration discovery
+- [x] Refactor 001_initial.ts: Remove fs and path imports, use Vite's ?raw import for schema-v1.sql
+- [ ] Verify the changes compile and work in the browser environment
