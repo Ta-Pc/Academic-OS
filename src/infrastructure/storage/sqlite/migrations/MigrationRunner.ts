@@ -1,5 +1,3 @@
-import fs from 'fs';
-import path from 'path';
 import { SQLiteManager } from '../SQLiteManager';
 import { TransactionManager } from '../TransactionManager';
 import { Migration } from './Migration';
@@ -93,24 +91,16 @@ export class MigrationRunner {
   }
 
   private async loadMigrations(): Promise<void> {
-    const migrationsDir = path.resolve(__dirname, './');
-    const files = fs.readdirSync(migrationsDir);
+    const modules = import.meta.glob('/src/infrastructure/storage/sqlite/migrations/!(*_template|MigrationRunner|Migration).ts');
 
-    const migrationFiles = files.filter(
-      (file) => file.match(/^\d+.*\.ts$/) && file !== 'MigrationRunner.ts' && file !== 'Migration.ts'
-    );
+    // Get the paths and sort them
+    const paths = Object.keys(modules).sort();
 
-    // Sort files by version prefix
-    migrationFiles.sort();
-
-    for (const file of migrationFiles) {
-      const version = file.split('_')[0].replace('.ts', '');
-      // Dynamically import migration
-      // Note: This requires the environment to support dynamic import or use require
-      // Using require here for compatibility
-      // eslint-disable-next-line @typescript-eslint/no-var-requires
-      const migrationModule = require(path.join(migrationsDir, file));
-      const migrationInstance: Migration = migrationModule.default || migrationModule;
+    for (const path of paths) {
+      const filename = path.split('/').pop() || '';
+      const version = filename.split('_')[0];
+      const module = await modules[path]();
+      const migrationInstance = (module as any).default as Migration;
       this.migrations.push({ version, migration: migrationInstance });
     }
   }

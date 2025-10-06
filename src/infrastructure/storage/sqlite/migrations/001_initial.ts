@@ -1,7 +1,7 @@
-import fs from 'fs';
-import path from 'path';
 import { SQLiteManager } from '../SQLiteManager';
 import { Migration } from './Migration';
+
+import schemaSQL from '/src/infrastructure/storage/sqlite/schema/schema-v1.sql?raw';
 
 export class InitialMigration implements Migration {
   private sqliteManager: SQLiteManager;
@@ -11,11 +11,8 @@ export class InitialMigration implements Migration {
   }
 
   public async up(): Promise<void> {
-    const schemaPath = path.resolve(__dirname, '../../schema/schema-v1.sql');
-    const schemaSql = fs.readFileSync(schemaPath, 'utf-8');
-
     // Split the schema into individual statements and execute them
-    const statements = schemaSql
+    const statements = schemaSQL
       .split(';')
       .map(stmt => stmt.trim())
       .filter(stmt => stmt.length > 0);

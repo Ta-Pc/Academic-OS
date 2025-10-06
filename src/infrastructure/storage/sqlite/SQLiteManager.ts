@@ -23,7 +23,9 @@ export class SQLiteManager {
 
     try {
       if (!this.isInitialized) {
-        this.sqlJs = await initSqlJs();
+        this.sqlJs = await initSqlJs({
+          locateFile: file => `node_modules/sql.js/dist/${file}`
+        });
         this.isInitialized = true;
       }
 
