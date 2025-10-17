@@ -1,5 +1,3 @@
-Here is the completed README.md file, filled in with information extracted from the provided "Academic OS Definition Document".
-
 # Academic OS
 
 > 🎓 Your personal academic analytical engine
