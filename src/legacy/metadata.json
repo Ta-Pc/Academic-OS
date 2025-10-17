@@ -1,5 +1,0 @@
-{
-  "name": "Academic-OS Setup",
-  "description": "An application to initialize a student's Academic-OS profile, including academic information, data import, system settings, and calendar configuration.",
-  "requestFramePermissions": []
-}

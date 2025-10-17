@@ -1,3 +1,0 @@
-- [x] Fix TermSelector props in CreateModuleDrawer.tsx
-- [x] Fix TermSelector props in EditModuleDrawer.tsx
-- [ ] Test the fix by running the app
