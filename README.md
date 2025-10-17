@@ -12,7 +12,7 @@ Academic-OS is a personal, offline-first application designed to be the single s
 
 ## Download
 
-📦 **[Download Latest Release](https://github.com/siphozuma/Academic-OS/releases/latest)**
+📦 **[Download Latest Release](https://github.com/Ta-Pc/Academic-OS/releases/tag/v1.0.0)**
 
 Supports:
 - ✅ Windows 10/11
