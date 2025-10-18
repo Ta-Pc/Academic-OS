@@ -83,7 +83,7 @@ Academic-OS is built to answer three crucial questions: *What is my workload?*, 
 
 ## License
 
-This software is proprietary. See [LICENSE](LICENSE) for terms.
+This software is proprietary. See [LICENSE]([LICENSE](https://github.com/Ta-Pc/Academic-OS/blob/main/LICENCE)) for terms.
 
 **Source code is NOT publicly available.**
 
