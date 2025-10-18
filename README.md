@@ -10,7 +10,7 @@ Academic-OS is a personal, offline-first application designed to be the single s
 
 ## Download
 
-📦 **[Download Latest Release](https://github.com/Ta-Pc/Academic-OS/releases/tag/v1.0.0)**
+📦 **[Download Latest Release](https://github.com/Ta-Pc/Academic-OS/releases)**
 
 Supports:
 - ✅ Windows 10/11
