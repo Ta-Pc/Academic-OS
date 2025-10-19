@@ -1,92 +1,94 @@
 # Academic OS – AI-Powered Academic Performance Tracker
 
-> 🎓 Your personal academic analytical engine
+> 🎓 **Your personal, offline-first academic analytics engine**
 
-![Version](https://img.shields.io/github/v/release/siphozuma/Academic-OS)
-![Downloads](https://img.shields.io/github/downloads/siphozuma/Academic-OS/total)
-![License](https://img.shields.io/badge/license-Proprietary-red)
+[![Version](https://img.shields.io/github/v/release/Ta-Pc/Academic-OS?label=latest%20version)](https://github.com/Ta-Pc/Academic-OS/releases)
+[![Downloads](https://img.shields.io/github/downloads/Ta-Pc/Academic-OS/total)](https://github.com/Ta-Pc/Academic-OS/releases)
+[![License](https://img.shields.io/badge/license-Proprietary-red)](#license)
 
-Academic-OS is a personal, offline-first application designed to be the single source of truth for your academic performance. It replaces complex spreadsheets with a powerful analytical engine, helping you understand your grades, manage your workload, and achieve your goals.
+**Academic OS** replaces complex grade spreadsheets with an incremental analytics engine that tells you **what your workload is**, **how you’re performing**, and **whether you’re on track to reach your goals** – all completely offline.
 
-## Download
+---
 
-📦 **[Download Latest Release](https://github.com/Ta-Pc/Academic-OS/releases)**
+## 📦 Download
 
-Supports:
-- ✅ Windows 10/11
-- ✅ macOS 11+
-- ✅ Linux (AppImage)
-- ✅ Android (via PWA)
+**[⬇️ Grab the Latest Release](https://github.com/Ta-Pc/Academic-OS/releases)**  
 
-## Features
+| Platform | Support |
+|----------|---------|
+| Windows 10/11 | ✅ |
+| macOS 11 & newer | ✅ |
+| Linux (AppImage) | ✅ |
+| Android / iOS (as PWA) | ✅ |
 
-Academic-OS is built to answer three crucial questions: *What is my workload?*, *How am I performing?*, and *Am I meeting my goals?*
+---
 
-<img width="1918" height="1079" alt="image" src="https://github.com/user-attachments/assets/9290a5d4-62b3-48ad-84af-21c95019a742" />
- <img width="1919" height="1070" alt="image" src="https://github.com/user-attachments/assets/0f06e0a9-fba3-4bc9-bab7-0617967eddd9" />
- <img width="1913" height="1079" alt="image" src="https://github.com/user-attachments/assets/afc05bc0-e73f-4ea5-ac8b-2d1bf00919f3" />
-<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/d8d855f7-17c0-4d43-80e1-5260eb937946" />
-<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/ea5ffffd-25d5-48c1-bfc4-e0e4f2e3e89b" />
-<img width="1891" height="1015" alt="image" src="https://github.com/user-attachments/assets/fd009fce-ed14-4384-8733-6aab40490f62" />
-<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/448d7433-3ef9-4735-a563-0663ff5629f0" />
+## ✨ Key Features
 
+| | |
+|-|-
+| **🎯 Goal-Oriented Planning** | • Set target grades for modules / terms • Feasibility analysis tells you the mark you need on upcoming work • “What-if” projections & recovery-plan alerts |
+| **📈 Powerful Analytics** | • Real-time “Module Command Centre” dashboard • Trend charts (weekly / monthly / semester) • Auto-updates overdue status |
+| **📚 Effortless Workload Management** | • Unified assessment list, sortable & filterable • CSV import for instant onboarding |
+| **🔒 Private & Offline-First** | • Runs 100 % locally (Electron + SQLite + WASM) • No accounts, no cloud • Export/backup anytime • PWA for mobile use |
 
+---
 
-#### 🎯 **Goal-Oriented Planning**
-- **Set & Track Goals:** Define target grades for modules, semesters, or even weekly assessments.
-- **Feasibility Analysis:** Instantly know the required marks on future assessments to achieve your targets.
-- **Mark Range Predictions:** Set expected scores for upcoming work and get alerts if you fall below, prompting you to create a recovery plan.
+## 🖼️ Screenshots
 
-#### 📈 **Powerful Analytics & Insights**
-- **At-a-Glance Dashboard:** A central "Module Command Centre" shows the current status, grade, and upcoming deadlines for all your courses.
-- **Performance Trends:** Visualize your progress over time with charts and graphs for weekly, monthly, and semester averages.
-- **Incremental Analytics Engine:** All stats and projections update in near real-time as you enter data, with no lag.
-- **Automated Updates:** The system automatically marks assignments as overdue to keep your data pristine.
+| Dashboard | Workload View |
+|-----------|---------------|
+|<img alt="Academic OS dashboard screenshot dark"   src="https://github.com/user-attachments/assets/afc05bc0-e73f-4ea5-ac8b-2d1bf00919f3" width="100%">   | <img alt="Academic OS Assessment screenshot dark" src="https://github.com/user-attachments/assets/8600187d-7ab1-4561-b6b0-c44b8cb60f10" width="100%"> |
 
-#### 📚 **Effortless Workload Management**
-- **Centralized Assessment View:** Manage and track every test, assignment, and practical from all your modules in one filterable and sortable list.
-- **Immediate Workload Focus:** Quickly see what's due soon to prioritize your efforts effectively.
-- **Data Import:** Easily import your module and assessment data from CSV files to get started quickly.
+## Additional screenshots  
+<img width="49.5%" alt="Module details analytics screenshot" src="https://github.com/user-attachments/assets/24cf4ec7-788c-4439-a1a2-1eeff7af0a06" />
+<img alt="Academic OS dashboard screenshot dark" src="https://github.com/user-attachments/assets/0f06e0a9-fba3-4bc9-bab7-0617967eddd9" width="49.5%">
 
-#### 🔒 **Personal, Private, and Offline-First**
-- **Works Completely Offline:** No internet connection required. Your data is yours, stored locally on your device.
-- **Progressive Web App (PWA):** A single, responsive app that works seamlessly on both desktop and mobile browsers.
-- **Secure by Design:** No user accounts, cloud sync, or servers. Export your data anytime for manual backup.
-- **Customizable Interface:** Switch between Dark and Light themes to suit your preference.
+---
 
-## Installation
+## 🛠️ Installation
 
-#### **Windows**
-1. Download the latest `Academic-OS-Setup-x.x.x.exe` file.
-2. Double-click the installer and follow the on-screen instructions.
+### Windows
+1. Download **`Academic-OS-Setup-x.x.x.exe`** from the release page.  
+2. Double-click the installer and follow the wizard.
 
-#### **macOS**
-1. Download the latest `Academic-OS-x.x.x.dmg` file.
-2. Open the DMG file, and drag the `Academic-OS` icon into your `Applications` folder.
+### macOS
+1. Download **`Academic-OS-x.x.x.dmg`** (Intel) or **`-arm64.dmg`** (Apple Silicon).  
+2. Drag **Academic OS** into **Applications**.
 
-#### **Linux**
-1. Download the latest `Academic-OS-x.x.x.AppImage` file.
-2. Make the file executable: `chmod a+x Academic-OS-x.x.x.AppImage`
-3. Run the application: `./Academic-OS-x.x.x.AppImage`
+### Linux
+```bash
+chmod +x Academic-OS-x.x.x.AppImage
+./Academic-OS-x.x.x.AppImage
+```
 
-## Documentation
+---
 
+## 📚 Documentation
 - [User Guide](docs/user-guide.md)
 - [FAQ](docs/faq.md)
 - [Changelog](CHANGELOG.md)
 
-## Support
+---
 
-- 🐛 [Report a Bug](https://github.com/siphozuma/Academic-OS/issues/new?template=bug_report.md)
-- 💡 [Request a Feature](https://github.com/siphozuma/Academic-OS/issues/new?template=feature_request.md)
-- 📧 Email: sip.zuma@gmail.com
-
-## License
-
-This software is proprietary. See [LICENSE]([LICENSE](https://github.com/Ta-Pc/Academic-OS/blob/main/LICENCE)) for terms.
-
-**Source code is NOT publicly available.**
+## 🙋‍♀️ Support / Feedback
+| | |
+|---|---|
+| 🐛 **Bug** | [Open a bug report](https://github.com/Ta-Pc/Academic-OS/issues/new?template=bug_report.md) |
+| 💡 **Feature** | [Request a feature](https://github.com/Ta-Pc/Academic-OS/issues/new?template=feature_request.md) |
+| 📧 **Email** | sip.zuma@gmail.com |
 
 ---
 
-© 2025 Sipho Zuma. All rights reserved.
+## License
+This software is **proprietary**. See the [LICENSE](https://github.com/Ta-Pc/Academic-OS/blob/main/LICENCE) file for terms.  
+**Source code is not publicly available.**
+
+---
+
+© 2025 Sipho Zuma – All rights reserved.
+
+---
+
+### What is Academic OS?
+*Academic OS is an Electron/React/Vite desktop application that uses a local SQLite (WASM) engine to calculate GPA, module trends, and workload predictions in real-time. It’s designed for students who want the power of enterprise analytics without handing data to the cloud.*
