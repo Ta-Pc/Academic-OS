@@ -1,4 +1,4 @@
-# Academic OS
+# Academic OS – AI-Powered Academic Performance Tracker
 
 > 🎓 Your personal academic analytical engine
 
