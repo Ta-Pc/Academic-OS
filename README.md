@@ -1,5 +1,3 @@
-Here is the completed README.md file, filled in with information extracted from the provided "Academic OS Definition Document".
-
 # Academic OS
 
 > 🎓 Your personal academic analytical engine
@@ -12,7 +10,7 @@ Academic-OS is a personal, offline-first application designed to be the single s
 
 ## Download
 
-📦 **[Download Latest Release](https://github.com/siphozuma/Academic-OS/releases/latest)**
+📦 **[Download Latest Release](https://github.com/Ta-Pc/Academic-OS/releases)**
 
 Supports:
 - ✅ Windows 10/11
@@ -85,7 +83,7 @@ Academic-OS is built to answer three crucial questions: *What is my workload?*, 
 
 ## License
 
-This software is proprietary. See [LICENSE](LICENSE) for terms.
+This software is proprietary. See [LICENSE]([LICENSE](https://github.com/Ta-Pc/Academic-OS/blob/main/LICENCE)) for terms.
 
 **Source code is NOT publicly available.**
 
