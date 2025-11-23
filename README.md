@@ -1,4 +1,4 @@
-# Academic OS – AI-Powered Academic Performance Tracker
+# Academic OS – Academic Performance Tracker
 
 > 🎓 **Your personal, offline-first academic analytics engine**
 
@@ -38,11 +38,13 @@
 
 | Dashboard | Workload View |
 |-----------|---------------|
-|<img alt="Academic OS dashboard screenshot dark"   src="https://github.com/user-attachments/assets/afc05bc0-e73f-4ea5-ac8b-2d1bf00919f3" width="100%">   | <img alt="Academic OS Assessment screenshot dark" src="https://github.com/user-attachments/assets/8600187d-7ab1-4561-b6b0-c44b8cb60f10" width="100%"> |
+|<img alt="Academic OS dashboard screenshot dark" src="https://github.com/user-attachments/assets/17dbf71e-2179-45f1-a73f-a75404bd538d" width="100%"/> | <img alt="Academic OS Action Pane screenshot dark" src="https://github.com/user-attachments/assets/b6898097-8b6a-440d-8719-c7bbe674cd95" width="100%" /> |
 
 ## Additional screenshots  
-<img width="49.5%" alt="Module details analytics screenshot" src="https://github.com/user-attachments/assets/24cf4ec7-788c-4439-a1a2-1eeff7af0a06" />
-<img alt="Academic OS dashboard screenshot dark" src="https://github.com/user-attachments/assets/0f06e0a9-fba3-4bc9-bab7-0617967eddd9" width="49.5%">
+<img width="49.5%" alt="Module details analytics screenshot" src="https://github.com/user-attachments/assets/aa55b959-8394-4deb-8eb6-cdd212ce1878" />
+
+<img width="49.5%" alt="Academic OS Timer screenshot" src="https://github.com/user-attachments/assets/c4f005cd-d15b-4137-a347-71e8cfb67a59" />
+
 
 ---
 
