@@ -53,10 +53,10 @@ This final release transforms the tool from a tracker into a complete **Academic
 
 ## Additional screenshots  
 <img width="49.5%" alt="image" src="https://github.com/user-attachments/assets/5cdee4a4-c930-44ef-bfca-17c59efe0500" />
-<img width="49.5%" height="2535" alt="image" src="https://github.com/user-attachments/assets/074daac8-51aa-4496-a54d-2383e67726d5" />
+<img width="49.5%" alt="image" src="https://github.com/user-attachments/assets/074daac8-51aa-4496-a54d-2383e67726d5" />
 
 
-<img width="49.5%" alt="Academic OS Timer screenshot" src="https://github.com/user-attachments/assets/c4f005cd-d15b-4137-a347-71e8cfb67a59" />
+<img width="100%" alt="Academic OS Timer screenshot" src="https://github.com/user-attachments/assets/c4f005cd-d15b-4137-a347-71e8cfb67a59" />
 
 
 ---
