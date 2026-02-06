@@ -14,104 +14,80 @@ Have a question? We've compiled a list of common questions and answers below.
 ## General Questions
 
 #### What is Academic OS?
-Academic OS is your personal, offline-first analytical engine designed to be the single source of truth for your academic performance. It helps you track grades, manage your workload, and understand what you need to do to achieve your academic goals, all without needing an internet connection.
+Academic OS is your personal, offline-first analytical engine designed to be the single source of truth for your academic performance. It helps you track grades, manage your workload, and understand what you need to do to achieve your academic goals.
 
 #### What platforms is Academic OS available on?
 Academic OS is available for:
-*   Windows 10/11
-*   macOS 11+
-*   Linux (via AppImage)
-*   Android and iOS (as a Progressive Web App installed from your browser)
-
-Please see the [Installation Guide](installation.md) for detailed instructions.
+*   **Desktop:** Windows 10/11, macOS 11+, and Linux.
+*   **Mobile:** Android (Native App) and iOS (Web/PWA).
 
 #### Is Academic OS free?
 Academic OS is proprietary software. The compiled binary releases are available for personal, non-commercial use as per the terms of the license.
 
 #### Can I collaborate with friends or classmates using Academic OS?
-No. Academic OS is designed as a single-user, personal tool. All data and features are for your individual use on your own devices. There are no social or multi-user capabilities.
+No. Academic OS is designed as a **single-user, personal tool**. All data and features are for your individual use. There are no social or multi-user capabilities.
 
 ---
 
 ## Data and Privacy
 
 #### Is my academic data safe? Where is it stored?
-**Your data is 100% private and safe.** All information you enter into Academic OS is stored **locally on your device's storage** (using a SQLite database file). Nothing is ever uploaded to a server, the cloud, or sent over the internet. You have full control over your data.
+**Your data is 100% private.**
+*   **Local First:** By default, all data is stored locally on your device in a secure SQLite database.
+*   **Cloud Sync (Optional):** You can opt-in to **Cloud Sync** to backup your data to your personal Google Drive. This data remains private to you and is not accessible by us or anyone else.
 
 #### Can Academic OS automatically import my grades from my university's website?
-No. To ensure your privacy and maintain its offline-first design, Academic OS does not connect to any university systems. You can add your data manually or use the CSV import feature.
+No. To ensure your privacy and stability, Academic OS does not connect to third-party university portals. You can add data manually or use the CSV import feature.
 
-#### How do I move my data to a new computer?
-You can easily move your entire Academic OS setup to a new device by following these two steps:
-1.  **On your OLD device:** Go to `Settings > Data Management > Export Full Backup`. This will save a single `.json` file containing all your data.
-2.  **On your NEW device:** Install Academic OS, then go to `Settings > Data Management > Import from Backup`. Select the `.json` file you just saved.
-    **Warning:** Importing from a backup will completely overwrite any data on the new device.
+#### How do I move my data to a new computer or phone?
+You have two options:
+1.  **Cloud Sync (Recommended):** Simply sign in with your Google Account on the new device. Your data will automatically sync.
+2.  **Manual Backup:**
+    *   **Old Device:** Go to `Settings > Data Management > Export Full Backup` to save a `.json` file.
+    *   **New Device:** Go to `Settings > Data Management > Import from Backup` and select that file.
 
-#### What happens if my computer crashes? Is my data gone forever?
-Academic OS has a robust backup system. It automatically creates "safety backups" before certain critical operations (like an app update). While these are helpful for recovery from system errors, we **strongly recommend** that you perform regular manual backups using the `Export Full Backup` feature and save the file to a separate location (like a USB drive or cloud storage service) for maximum safety.
+#### What happens if my computer crashes?
+If you have **Cloud Sync** enabled, your data is safe in your Google Drive and can be restored instantly. If you use the app offline, we recommend performing regular manual backups (`Export Full Backup`) to an external drive.
 
 ---
 
 ## Modules and Assessments
 
 #### What's the best way to get my course data into the app?
-You have two options:
-1.  **Manual Entry:** Use the "Add New" button to create your modules and assessments one by one. This is great for starting fresh.
-2.  **CSV Import:** If you have your data in a spreadsheet, you can export it as a CSV file and use our powerful import wizard. This is the fastest way to get set up.
-
-#### What's the correct format for the CSV import?
-The import wizard is flexible, but here are some key guidelines:
-*   The file must be a `.csv` file.
-*   It should use a **semicolon (`;')** or **comma (`,')** as the delimiter.
-*   The first row must be headers (e.g., "Module Code", "Assessment Name").
-*   **Required columns:** `Module Code`, `Assessment Name`, `Assessment Type`, `Weight (%)`.
-*   **Date format:** The importer can understand many formats (like `YYYY-MM-DD`, `DD/MM/YYYY`, `21 October 2025`). For unconfirmed dates, you can simply write `TBC`.
+1.  **Manual Entry:** Use the "Add Module" button for quick setup.
+2.  **CSV Import:** Use the Import Wizard (in Settings) to load data from a spreadsheet. This is ideal for bulk importing past marks.
 
 #### I dropped a course. Should I Archive it or Delete it?
 **We strongly recommend you Archive it.**
-*   **Archiving** a module hides it from your dashboard and excludes it from all calculations, but it preserves the data. You can restore it at any time from `Settings > Data Management > Manage Archived Modules`.
-*   **Deleting** a module is a **permanent, irreversible** action that erases the module and all its associated assessments and grades forever.
+*   **Archiving:** Hides the module from your dashboard but keeps the data for your records. (Restore via `Settings > Data Management`).
+*   **Deleting:** Permanently erases the module and all its grades. This cannot be undone.
 
 #### I made a mistake entering a grade. How do I fix it?
-Simply find the assessment in the Assessment View or on its Module Details page, click on it to open the details dialog, and click the "Edit" button. You can then change the grade and save your corrections. All your stats will update automatically.
+Open the assessment details (click on it in any list) and select **"Edit"**. Update the grade, and all your module stats—including term averages—will recalculate instantly.
 
 ---
 
 ## Features and Customization
 
-#### What does the "Status Badge" on a module (e.g., "At Risk") mean?
-The status badge is a quick indicator of a module's health, based on your performance and goals:
-*   **On Track:** Everything looks good!
-*   **Needs Attention:** Your projected final grade is below your target grade.
-*   **At Risk:** Your performance is low enough that you may not meet the minimum requirement to pass or enter the final exam.
+#### What does the "Status Badge" mean?
+It indicates your performance trend:
+*   **On Track:** You are meeting your goals.
+*   **Needs Attention:** You are falling slightly behind your target.
+*   **At Risk:** Your current performance indicates you might fail or miss exam entry requirements.
 
-#### What are the customizable "Tiles" on the Module Details page?
-Tiles are widgets that show specific pieces of information about a module. You can completely customize the layout for each module!
-*   Click the three-dot menu on a module page and select "Customize View."
-*   From there, you can add, remove, and drag-and-drop tiles.
-*   You can even create your own custom tiles with unique formulas to track the stats that matter most to you.
+#### What are "Tiles"?
+Tiles are the widgets on your Module Details page. You can customize them:
+*   **Layout:** Drag and drop to rearrange.
+*   **Builder:** Create your own tiles using Excel-style formulas (e.g., `=AVERAGE(assessments.result)`) to track exactly what you care about.
 
 ---
 
 ## Troubleshooting
 
-#### I'm trying to open the app on my Mac and it says it's from an "unidentified developer."
-This is a standard macOS security feature. To fix this, right-click the Academic OS icon in your Applications folder, select "Open" from the menu, and then click "Open" again in the dialog box. You only need to do this the first time you run the app.
-
 #### Windows is showing a blue "Windows protected your PC" screen.
-This is the Windows Defender SmartScreen, which is common for new applications. Click **"More info,"** and then click the **"Run anyway"** button.
-
-#### I forgot to add a semester during the initial setup. Can I add it later?
-Yes. You can manage your academic calendar at any time by going to `Settings > Academic Setup`.
+This is the **Windows Defender SmartScreen**. It often flags new software. Click **"More info,"** and then click the **"Run anyway"** button to proceed.
 
 #### I want to start over completely. How do I do that?
-You can reset the entire application by going to `Settings > Danger Zone > Reset Application`.
-**Warning:** This is a highly destructive action that will erase all your data. The system will force you to download a final backup of your data before you can proceed with the reset.
-
----
-
-### Still have questions?
-If your question isn't answered here, please feel free to:
-*   🐛 [Report a Bug](https://github.com/siphozuma/Academic-OS/issues/new?template=bug_report.md)
-*   💡 [Request a Feature](https://github.com/siphozuma/Academic-OS/issues/new?template=feature_request.md)
-*   📧 Email us at **support@academicos.com**
+Go to **Settings > Danger Zone > Reset Application**.
+*   **Warning:** This will delete **ALL** local data.
+*   If Cloud Sync is on, you may also need to delete your remote backup (an option is provided in the Cloud Settings) to prevent it from re-syncing.
