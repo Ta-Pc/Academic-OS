@@ -1,148 +1,100 @@
 # Academic OS - User Guide
 
-Welcome to Academic OS! This guide will walk you through everything you need to know to take control of your academic performance, from initial setup to advanced customization.
+Welcome to Academic OS! This guide will walk you through everything you need to know to take control of your academic performance.
 
 ## Table of Contents
 - [Getting Started: First-Time Setup](#getting-started-first-time-setup)
-- [The Main Dashboard: Your Command Center](#the-main-dashboard-your-command-center)
-- [Managing Your Modules (Courses)](#managing-your-modules-courses)
-- [Managing Your Assessments (Grades & Tasks)](#managing-your-assessments-grades--tasks)
-- [Advanced: Customizing Your Views with Tiles](#advanced-customizing-your-views-with-tiles)
-- [Settings and Data Management](#settings-and-data-management)
+- [The Dashboard: Your Command Center](#the-dashboard-your-command-center)
+- [Setting Up Your Academic Year](#setting-up-your-academic-year)
+- [Managing Modules (Courses)](#managing-modules-courses)
+- [Managing Assessments (Grades & Tasks)](#managing-assessments-grades--tasks)
+- [Customizing Your Views](#customizing-your-views)
+- [Settings & Cloud Sync](#settings--cloud-sync)
 
 ---
 
 ## Getting Started: First-Time Setup
+Academic OS allows you to get started in seconds.
 
-When you open Academic OS for the first time, a setup wizard will guide you through a few simple steps to get you up and running.
+1.  **Experience Intelligence:** Swipe through the introductory slides to see what Academic OS can do.
+2.  **Create Your Profile:**
+    *   **Avatar:** Choose an icon that represents you.
+    *   **Name:** Enter your name so the app can address you.
+3.  **That's it!** You will be taken directly to your new Dashboard.
 
-#### 1. Enter Your Academic Info
-First, you'll tell the app about your degree program. You'll be asked for:
-*   Your Name and Student Number
-*   Degree Name (e.g., BIT Information Systems)
-*   Specialization, Duration, and NQF Level
-
-#### 2. Configure Your Academic Calendar
-This is a crucial step that powers all the date-related features.
-*   The app will start with a default template (e.g., one year with two semesters).
-*   Click on a year to expand it.
-*   Adjust the start and end dates for your semesters or quarters. You can also add new years if needed.
-*   Once you're done, click **Save & Continue**.
-
-#### 3. Import Your Data (Optional)
-You can get a head start by importing existing module and assessment data from a CSV file.
-*   **If you have a CSV:** Click "Select File" and choose your file. The wizard will guide you through a 5-step process:
-    1.  **File Selection:** Upload your `.csv` file.
-    2.  **Column Mapping:** Match the columns in your file (like "Assesment Name") to the fields in Academic OS ("Assessment Name"). The "Auto Map" button does a great job of this automatically!
-    3.  **Data Preview:** Review the first few rows to make sure everything looks correct. The system will highlight potential errors (in red) or warnings (in yellow).
-    4.  **Conflict Resolution:** If you're importing data for modules that don't exist yet, the app will ask you to create them.
-    5.  **Confirmation:** Review a final summary and click **Import**.
-*   **If you don't have a file:** No problem! Just click **Skip** and you can add your modules and assessments manually later.
-
-#### 4. Set Your Preferences
-Finally, choose your preferred look and feel:
-*   **Theme:** Light, Dark, or System Default.
-*   **Language:** Choose from the available languages.
-*   **Notifications:** Enable or disable due date reminders.
-
-Click **Finish Setup**, and you'll be taken to your new dashboard!
+> **Note:** We believe in getting out of your way. Detailed configuration like your specific degree and subjects happens naturally as you use the app.
 
 ---
 
-## The Main Dashboard: Your Command Center
+## The Dashboard: Your Command Center
+The Dashboard gives you a high-level view of your current academic term.
 
-The Dashboard gives you a high-level "10,000-foot view" of your entire academic situation. It's designed to answer "How am I doing?" and "What's next?".
-
-*   **Term Timeline:** See where you are in the current semester, a countdown to exams, and a visual of how much of your grade is still to be determined.
-*   **Overall Academic Health:** Get your current Term Average, track weekly study goals, and see a summary of modules that are On Track, Need Attention, or are At Risk.
-*   **Priority Actions:** This is your to-do list! It shows the top 3-5 upcoming assessments, automatically sorted by importance.
-*   **Day Overload:** A 7-day bar chart that shows how much work is due each day, helping you spot overloaded days in advance.
-*   **Modules Overview:** A grid of all your active modules. Each tile gives you a rich summary of that module's status, current mark, and next due item.
-
-#### Switching Between Terms
-Use the dropdown menu in the main header to switch the entire dashboard's view to a different semester or year. This is perfect for reviewing past performance or planning for the future.
+*   **Workload Forecast:** A 7-day bar chart showing upcoming due dates.
+*   **Priority Actions:** A smart list of your most urgent tasks.
+*   **Modules Overview:** A grid of all your active modules.
 
 ---
 
-## Managing Your Modules (Courses)
+## Setting Up Your Academic Year
+When you first land on the Dashboard, it will look empty. This is normal!
+
+1.  **Add an Academic Year:** Click the **"Add Academic Year"** button (or the large "+ Year" ghost row).
+2.  **Select Year:** Choose the current calendar year (e.g., 2026).
+3.  **Automatic Term Generation:** The system will automatically generate standard terms (e.g., Quarter 1-4 or Semester 1-2) for you. You can edit these dates later in **Settings > Calendar**.
+
+---
+
+## Managing Modules (Courses)
 
 #### Creating a New Module
-1.  Click the **"Add New"** button in the global header and select "Create Module".
-2.  A drawer will slide open from the right.
-3.  Select the Academic Term it belongs to (e.g., "Semester 2, 2025").
-4.  Fill in the module details like code, name, credits, and your target grade.
-5.  Click **"Save changes"**. You'll be taken directly to the details page for your new module.
+Once your Year is set up, you can add your subjects.
+1.  Click the **"+"** button (FAB on mobile, or "Add Module" on desktop).
+2.  Select **"Create Module"**.
+3.  **Module Details:** Enter the Course Code (e.g., COS 110), Name, Credits, and select the **Term** it belongs to.
+4.  Click **"Save Changes"**.
 
-#### Viewing and Editing a Module
-*   **Quick View:** Click on any module tile on the Dashboard to get a quick overview dialog with key stats and upcoming items.
-*   **Full Details:** From the quick view, click **"View Module Details"** to go to its main page.
-*   **Editing:** On the Module Details page, click the **"Edit Module"** button in the header. The same drawer from creation will appear, pre-filled with the module's info. Make your changes and click **"Save changes"**.
-
-#### Archiving vs. Deleting a Module
-From the Module Details page, you have two options:
-*   **Archive (Recommended):** This safely hides the module and its assessments from your main views and calculations. The data is preserved and can be restored later.
-*   **Delete (Permanent):** This is a destructive action that will permanently erase the module and all its associated data. To prevent accidents, you will be required to type the module code to confirm.
-
-#### Restoring an Archived Module
-1.  Go to **Settings > Data Management > Manage Archived Modules**.
-2.  Find the module you want to restore.
-3.  Click the "Unarchive" option from its menu. The module will reappear on your dashboard.
+#### Managing Your Module
+Click on any Module Tile to open the **Module Details Page**.
+*   **Vital Signs:** See your current average and progress instantly.
+*   **Stats Grid:** View detailed breakdowns (Class Mark vs Exam Mark).
+*   **Assessments:** Add and manage all tasks for this module here.
 
 ---
 
-## Managing Your Assessments (Grades & Tasks)
+## Managing Assessments (Grades & Tasks)
 
-#### The Assessment View
-Navigate to the **"Assessments"** page from the main menu. This gives you a powerful master list of *every single assessment* from *all* your active modules. You can:
-*   **Filter:** Show only assessments that are "Overdue," "Due this week," or of a certain type like "Exams."
-*   **Sort:** Order your workload by due date, priority score, or module.
+#### Adding an Assessment
+1.  From the Module Page or Dashboard, click **"Add Assessment"**.
+2.  **Details:** Enter the Name, Type (Quiz, Assignment, Exam), Weight (%), and Due Date.
+3.  **Result:** You can leave the result empty for upcoming tasks, or enter it immediately for past work.
 
-#### Adding, Editing, and Deleting Assessments
-1.  **Adding:** From a Module Details page or the Assessment View, click the **"Add Assessment"** button. A form will appear where you can enter the name, type (e.g., Quiz, Assignment), due date, and weight.
-2.  **Viewing/Editing:** Click on any assessment in a list to open a detailed view.
-    *   From this view, click the **"Edit"** button to change its details or enter a grade.
-    *   When you enter a grade and save, all your module statistics will update instantly!
-3.  **Deleting:** From the detailed view, click the **"Delete"** button. A confirmation will appear to prevent accidental deletion.
+#### Tracking Performance
+*   **Grading:** Open an assessment and enter your percentage.
+*   **Live Updates:** Your Module Average and Term Stats recalculate *instantly* as you type.
 
 ---
 
-## Advanced: Customizing Your Views with Tiles
+## Customizing Your Views
 
-The Module Details page is built with customizable tiles. You can create your own personal dashboard for each course!
-
-#### Customizing the Layout
-1.  On any Module Details page, click the three-dot menu in the header and select **"Customize View"**.
-2.  The page enters "edit mode." You can now:
-    *   Click the red **"X"** on a tile to remove it.
-    *   **Drag-and-drop** tiles to reorder them.
-    *   Click a **"+"** icon in an empty slot to add a new tile.
-
-#### Creating Your Own Calculation Tiles
-1.  While in edit mode, click a **"+"** icon and then **"Create New Tile"**.
-2.  The **Tile Builder** will open. Here you can:
-    *   Give your tile a name, description, and icon.
-    *   Choose how to visualize the data (Number, Progress Bar, etc.).
-    *   Define a **formula** using Excel-style syntax. For example, to see your average quiz mark, you could write:
-        `=AVERAGE(FILTER(assessments, type="Quiz").result)`
-3.  The live preview shows you if your formula works. When you're happy, click **"Save Tile"**. It's now in your library to use in any module!
-
-#### Managing Your Tile Library
-In the Tile Selector, click **"Manage Tiles"**. This opens a central library where you can search, edit, duplicate, and archive all your custom tiles.
+#### The Tile Builder
+Personalize your Module pages with custom metrics.
+1.  On a Module Page, open the menu (three dots) and select **"Customize View"**.
+2.  Click **"Create New Tile"**.
+3.  **Formula Engine:** Use Excel-style formulas to build unique stats.
+    *   *Example:* `=AVERAGE(assessments.result)`
+4.  **Visuals:** Choose from Progress Bars, Trend Lines, or simple Number stats.
 
 ---
 
-## Settings and Data Management
+## Settings & Cloud Sync
 
-#### Backing Up and Restoring Your Data
-Your data is valuable. We highly recommend making regular backups.
-*   **Export Backup:** Go to **Settings > Data Management > Export Full Backup**. This will download a single `.json` file containing all your data. Save this file in a safe place.
-*   **Import from Backup:** Go to **Settings > Data Management > Import from Backup**.
-    *   **Warning:** This is a destructive action. Importing a file will **completely overwrite** all data currently in the app.
-    *   You will be asked to select your backup file and type "IMPORT" to confirm.
+#### Cloud Sync & Backup
+Prevent data loss by enabling Cloud Sync.
+1.  Go to **Settings > Cloud Sync**.
+2.  **Sign In:** Connect your Google Account.
+3.  **Sync:** Your data will be securely backed up to your personal Google Drive and synced across all your devices.
 
-#### Resetting the Application
-If you want to start completely fresh, you can reset the application.
-1.  Go to **Settings > Danger Zone > Reset Application**.
-2.  You will be **required** to download a final backup of your data before you can proceed.
-3.  After the download, you must type "RESET" to confirm.
-4.  All your data will be permanently erased, and the app will return to the first-time setup wizard.
+#### Importing Data
+If you have data from a previous export:
+*   Go to **Settings > Data Management**.
+*   Select **"Import from Backup"** to restore a JSON file.
