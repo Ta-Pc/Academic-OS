@@ -1,6 +1,6 @@
 # Academic OS – Academic Performance Ecosystem
 
-> 🔴 **PROJECT STATUS: NO LONGER ACTIVE (Archived at v7.1.2)**
+> 🔴 **PROJECT STATUS: NO LONGER ACTIVE (Archived at v7.2.1)**
 >
 > **The Cloud Era is here.**
 > As of February 2026, Academic OS evolved into a fully cloud-synchronized platform.
@@ -14,7 +14,7 @@
 
 **Academic OS** replaces complex grade spreadsheets with a professional analytics engine that tells you **what your workload is**, **how you’re performing**, and **whether you’re on track to reach your goals**.
 
-This final **v7.1.2** release represents the definitive stable version of the tool, featuring high-speed performance, batch processing tools, and flawless academic status parsing.
+This final **v7.2.1** release represents the pinnacle of the tool's evolution, featuring a complete batch-processing suite for rapid workload management and deep performance optimizations.
 
 ---
 
@@ -38,9 +38,9 @@ This final **v7.1.2** release represents the definitive stable version of the to
 | | |
 |-|-|
 | **☁️ Cloud Synchronization** | • **Google Drive Sync:** Seamlessly backup and restore your data across devices.<br>• **Conflict Resolution:** Smart handling of older/newer files with "Soft" and "Hard" delete capabilities. |
-| **📊 The Analytics Deck** | • **Grade Trajectory:** Finance-style area charts showing your average over time.<br>• **Radar Charts:** Analyze your strengths vs. weaknesses by category.<br>• **Effort Graph:** Correlate study hours with academic results. |
-| **🧠 Intelligent Logic** | • **Batch Management:** Multi-select and delete assessments with built-in safety guardrails.<br>• **Status Parsing:** 4-tier priority routing calculating exact pass/fail/DQ states.<br>• **Optimized Engine:** High-performance data access patterns and render-memoization. |
-| **⚡ Command Center Layout** | • **60/40 Split View:** See your analytics and your assignments simultaneously.<br>• **Native Feel:** "WhatsApp-style" swiping and smooth header transitions on mobile. |
+| **📊 The Analytics Deck** | • **Grade Trajectory:** Finance-style area charts showing your average over time.<br>• **Radar Charts:** Analyze your strengths vs. weaknesses by category. |
+| **🧠 Advanced Batch Actions** | • **Bulk Management:** Mark as submitted, enter results, shift due dates, and adjust effort for multiple assessments at once.<br>• **Exporting:** Integrated "Export to Excel" for selected assessments.<br>• **Safety Logic:** Selection states respect active filters and include deletion guardrails. |
+| **⚡ Optimized Engine** | • **Zero N+1 Queries:** Database layer optimized for batch retrieval.<br>• **Lazy Loading:** Assessment details are deferred until needed to ensure 60fps scrolling. |
 | **📜 Reports & Transcripts** | • **Digital Transcript:** View a year-by-year breakdown of your credits.<br>• **PDF Export:** Generate official-looking transcript reports with one click. |
 
 ---
