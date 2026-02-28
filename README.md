@@ -1,20 +1,19 @@
 # Academic OS – Academic Performance Ecosystem
 
-> 🔴 **PROJECT STATUS: NO LONGER ACTIVE (Archived at v7.2.1)**
+> 🚀 **PROJECT STATUS: ACTIVE (v7.4.0 — The AI & Ecosystem Update)**
 >
-> **The Cloud Era is here.**
-> As of February 2026, Academic OS evolved into a fully cloud-synchronized platform.
-> It now supports **Google Drive Sync**, **iOS**, **Android**, and **Windows** natively.
+> **The AI Era has arrived.**
+> As of late February 2026, Academic OS has evolved from a management tool into a proactive **AI Academic Assistant**. It features a full suite of intelligent planning tools, robust cloud synchronization, and a unified yearly overview.
 
-> 🎓 **Your personal, cloud-synced academic command center.**
+> 🎓 **Your personal, AI-powered academic command center.**
 
 [![Version](https://img.shields.io/github/v/release/Ta-Pc/Academic-OS?label=latest%20version)](https://github.com/Ta-Pc/Academic-OS/releases)
 [![Downloads](https://img.shields.io/github/downloads/Ta-Pc/Academic-OS/total)](https://github.com/Ta-Pc/Academic-OS/releases)
 [![Platform](https://img.shields.io/badge/platform-Web%20|%20iOS%20|%20Android%20|%20Windows-blue)](https://academic-os.pages.dev)
 
-**Academic OS** replaces complex grade spreadsheets with a professional analytics engine that tells you **what your workload is**, **how you’re performing**, and **whether you’re on track to reach your goals**.
+**Academic OS** replaces complex grade spreadsheets with a professional analytics engine that tells you **what your workload is**, **how you’re performing**, and **how to plan your future** using integrated AI. 
 
-This final **v7.2.1** release represents the pinnacle of the tool's evolution, featuring a complete batch-processing suite for rapid workload management and deep performance optimizations.
+The **v7.4.0** release marks a transition into a "Proactive Ecosystem," introducing an AI Advisor to build your schedules and a refined sync engine for a flawless multi-device experience.
 
 ---
 
@@ -22,26 +21,26 @@ This final **v7.2.1** release represents the pinnacle of the tool's evolution, f
 
 **[🌐 Open Web Version (Instant Access)](https://academic-os.pages.dev)**
 
-**[⬇️ Grab the Latest Release (Assets)](https://github.com/Ta-Pc/Academic-OS/releases)**
+**[⬇️ Grab the Latest v7.4.0 Release (Assets)](https://github.com/Ta-Pc/Academic-OS/releases)**
 
 | Platform | Support | Status | File / Link |
 |:---|:---:|:---|:---|
-| **Web (Browser)** | ✅ | **Live (Cloud Sync)** | [academic-os.pages.dev](https://academic-os.pages.dev) |
+| **Web (Browser)** | ✅ | **Live (v7.4.0)** | [academic-os.pages.dev](https://academic-os.pages.dev) |
 | **Android** | ✅ | **Native** | `Academic-OS.apk` |
 | **iOS** | ✅ | **Native** | `AcademicOS.ipa` |
 | **Windows** | ✅ | **Desktop** | `Academic-OS.exe` |
 
 ---
 
-## ✨ Key Features (The Cloud Era)
+## ✨ Key Features (v7.4.0)
 
 | | |
 |-|-|
-| **☁️ Cloud Synchronization** | • **Google Drive Sync:** Seamlessly backup and restore your data across devices.<br>• **Conflict Resolution:** Smart handling of older/newer files with "Soft" and "Hard" delete capabilities. |
-| **📊 The Analytics Deck** | • **Grade Trajectory:** Finance-style area charts showing your average over time.<br>• **Radar Charts:** Analyze your strengths vs. weaknesses by category. |
-| **🧠 Advanced Batch Actions** | • **Bulk Management:** Mark as submitted, enter results, shift due dates, and adjust effort for multiple assessments at once.<br>• **Exporting:** Integrated "Export to Excel" for selected assessments.<br>• **Safety Logic:** Selection states respect active filters and include deletion guardrails. |
-| **⚡ Optimized Engine** | • **Zero N+1 Queries:** Database layer optimized for batch retrieval.<br>• **Lazy Loading:** Assessment details are deferred until needed to ensure 60fps scrolling. |
-| **📜 Reports & Transcripts** | • **Digital Transcript:** View a year-by-year breakdown of your credits.<br>• **PDF Export:** Generate official-looking transcript reports with one click. |
+| **🤖 AI Advisor Suite** | • **AI Chatbot:** A built-in assistant to help build tailored academic plans.<br>• **Smart Calendar Creation:** Prompt-based extraction to generate your schedule automatically. |
+| **📥 The Choice Hub** | • **Integrated Importing:** Choose between AI-powered data extraction or traditional manual CSV uploads.<br>• **Robust Detection:** Intelligent mapping for "Results (%)" and assessment categories. |
+| **☁️ Enhanced Sync** | • **Optimized Engine:** Reduced bandwidth and zero redundant queries.<br>• **Perfect Integrity:** Resolved cascading soft-delete issues for seamless multi-device data harmony. |
+| **📊 Yearly Ecosystem** | • **Year Encapsulation:** A new "Year Block" that unifies all semesters into one clear yearly overview.<br>• **Time Precision:** Calculations now track down to the second for high-accuracy logging. |
+| **📱 Mobile-First UI** | • **Optimized Layout:** Flawless mobile AI experience with refined navigation, FAB positioning, and resolved header overlaps. |
 
 ---
 
@@ -56,18 +55,13 @@ This final **v7.2.1** release represents the pinnacle of the tool's evolution, f
   <img alt="Analytics View 1" src="https://github.com/user-attachments/assets/5cdee4a4-c930-44ef-bfca-17c59efe0500" width="49%" />
   <img alt="Analytics View 2" src="https://github.com/user-attachments/assets/074daac8-51aa-4496-a54d-2383e67726d5" width="49%" />
 </div>
-<br>
-<div align="center">
-  <img alt="Academic OS Timer screenshot" src="https://github.com/user-attachments/assets/c4f005cd-d15b-4137-a347-71e8cfb67a59" width="49%" />
-  <img alt="Module details light mode" src="https://github.com/user-attachments/assets/65a0e01c-79a8-4e9d-ac34-b7297fffee30" width="49%" />
-</div>
 
 ---
 
 ## 🛠️ Installation
 
 ### 🌐 Web (Recommended)
-Simply visit **[academic-os.pages.dev](https://academic-os.pages.dev)**. The app runs locally in your browser using WASM, now with optional Cloud Sync.
+Simply visit **[academic-os.pages.dev](https://academic-os.pages.dev)**. The app runs locally in your browser using WASM, featuring Google Drive Cloud Sync.
 
 ### 🤖 Android
 1. Download **`Academic-OS.apk`** from the release page.
@@ -92,6 +86,7 @@ Simply visit **[academic-os.pages.dev](https://academic-os.pages.dev)**. The app
 
 ## Tech Stack
 * **Core:** React, Vite, TypeScript
+* **Intelligence:** Integrated LLM for AI Advisor & Calendar Extraction
 * **State:** TanStack Query, Zustand
 * **Database:** SQLite (WASM) via SQL.js
 * **Cloud:** Google Drive API (OAuth 2.0)
