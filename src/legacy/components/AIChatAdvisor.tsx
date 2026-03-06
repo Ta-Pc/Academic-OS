@@ -76,7 +76,7 @@ const SUGGESTION_PILLS: SuggestionPill[] = [
   {
     label: '🎯 What should I focus on today?',
     prompt:
-      'Looking at my overdue and upcoming assessments as well as my current grades, what is the single most important thing I should work on today and why?',
+      'Looking at my upcoming assessments as well as my current grades, what is the single most important thing I should work on today and why?',
     icon: '🎯',
     requiresData: true,
   },
