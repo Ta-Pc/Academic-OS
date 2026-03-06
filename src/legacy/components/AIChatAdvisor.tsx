@@ -20,7 +20,8 @@
 
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { Module, Assessment, AcademicTerm } from '../../types';
-import { buildAcademicContext, getPriorityAssessments, DANGEROUS_MODULES_PROMPT } from '../services/aiContextBuilder';
+import { buildAcademicContext, DANGEROUS_MODULES_PROMPT } from '../services/aiContextBuilder';
+import { getPriorityAssessments } from '../services/priorityActions';
 
 // ---------------------------------------------------------------------------
 // Types
