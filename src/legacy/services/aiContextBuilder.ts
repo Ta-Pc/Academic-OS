@@ -52,14 +52,28 @@ function findModuleTerm(module: Module, allTerms: AcademicTerm[]): AcademicTerm 
 }
 
 /**
+ * Returns assessments that are eligible for the "Priority Actions" pane.
+ * Overdue and missed assessments are excluded — only upcoming (actionable)
+ * assessments are kept.
+ */
+export function getPriorityAssessments(assessments: Assessment[]): Assessment[] {
+  return assessments.filter(a => a.status !== 'Overdue' && a.status !== 'Missed');
+}
+
+/**
  * Assembles a rich, structured system-context string that describes the student's
  * full academic snapshot. This is injected as a system prompt before every AI call.
+ *
+ * When `excludeOverdue` is true the detailed assessment list omits overdue /
+ * missed items so the AI focuses only on actionable (upcoming) work — this is
+ * used when generating priority-action recommendations.
  */
 export function buildAcademicContext(
   modules: Module[],
   allAssessments: Assessment[],
   allTerms: AcademicTerm[],
   studentName?: string,
+  excludeOverdue?: boolean,
 ): string {
   const activeModules = modules.filter(m => m.status === 'In Progress');
 
@@ -78,9 +92,12 @@ export function buildAcademicContext(
   lines.push('--- MODULE DETAILS ---');
 
   for (const module of activeModules) {
-    const assessments = allAssessments.filter(a => a.moduleCode === module.moduleCode);
+    const allModuleAssessments = allAssessments.filter(a => a.moduleCode === module.moduleCode);
+    const assessments = excludeOverdue
+      ? allModuleAssessments.filter(a => a.status !== 'Overdue' && a.status !== 'Missed')
+      : allModuleAssessments;
     const term = findModuleTerm(module, allTerms);
-    const { continuousWeight, examWeight, isContinuousHeavy } = getAssessmentStructure(assessments);
+    const { continuousWeight, examWeight, isContinuousHeavy } = getAssessmentStructure(allModuleAssessments);
 
     const currentGrade =
       module.calculated_current_grade !== undefined && module.calculated_current_grade !== null
@@ -103,7 +120,7 @@ export function buildAcademicContext(
 
     const gradedAssessments = assessments.filter(a => a.status === 'Graded');
     const upcomingAssessments = assessments.filter(a => a.status === 'Upcoming');
-    const overdueAssessments = assessments.filter(a => a.status === 'Overdue' || a.status === 'Missed');
+    const overdueAssessments = allModuleAssessments.filter(a => a.status === 'Overdue' || a.status === 'Missed');
 
     const assessmentSummary = assessments
       .map(a => {
