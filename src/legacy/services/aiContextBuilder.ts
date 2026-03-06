@@ -52,12 +52,19 @@ function findModuleTerm(module: Module, allTerms: AcademicTerm[]): AcademicTerm 
 }
 
 /**
+ * Returns true when an assessment is overdue or missed (i.e. no longer actionable).
+ */
+function isOverdue(a: Assessment): boolean {
+  return a.status === 'Overdue' || a.status === 'Missed';
+}
+
+/**
  * Returns assessments that are eligible for the "Priority Actions" pane.
  * Overdue and missed assessments are excluded — only upcoming (actionable)
  * assessments are kept.
  */
 export function getPriorityAssessments(assessments: Assessment[]): Assessment[] {
-  return assessments.filter(a => a.status !== 'Overdue' && a.status !== 'Missed');
+  return assessments.filter(a => !isOverdue(a));
 }
 
 /**
@@ -94,7 +101,7 @@ export function buildAcademicContext(
   for (const module of activeModules) {
     const allModuleAssessments = allAssessments.filter(a => a.moduleCode === module.moduleCode);
     const assessments = excludeOverdue
-      ? allModuleAssessments.filter(a => a.status !== 'Overdue' && a.status !== 'Missed')
+      ? getPriorityAssessments(allModuleAssessments)
       : allModuleAssessments;
     const term = findModuleTerm(module, allTerms);
     const { continuousWeight, examWeight, isContinuousHeavy } = getAssessmentStructure(allModuleAssessments);
@@ -120,7 +127,7 @@ export function buildAcademicContext(
 
     const gradedAssessments = assessments.filter(a => a.status === 'Graded');
     const upcomingAssessments = assessments.filter(a => a.status === 'Upcoming');
-    const overdueAssessments = allModuleAssessments.filter(a => a.status === 'Overdue' || a.status === 'Missed');
+    const overdueAssessments = allModuleAssessments.filter(isOverdue);
 
     const assessmentSummary = assessments
       .map(a => {
