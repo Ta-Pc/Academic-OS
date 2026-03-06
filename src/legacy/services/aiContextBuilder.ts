@@ -5,6 +5,10 @@
  */
 
 import { Module, Assessment, AcademicTerm, AssessmentType } from '../../types';
+import { isOverdue, getPriorityAssessments } from './priorityActions';
+
+// Re-export so existing consumers that import from this module keep working.
+export { getPriorityAssessments } from './priorityActions';
 
 /** Assessment types that are considered "continuous" (spread throughout the term). */
 const CONTINUOUS_ASSESSMENT_TYPES: AssessmentType[] = [
@@ -49,22 +53,6 @@ export function getAssessmentStructure(assessments: Assessment[]): {
  */
 function findModuleTerm(module: Module, allTerms: AcademicTerm[]): AcademicTerm | undefined {
   return allTerms.find(t => t.id === module.anchorTermId);
-}
-
-/**
- * Returns true when an assessment is overdue or missed (i.e. no longer actionable).
- */
-function isOverdue(a: Assessment): boolean {
-  return a.status === 'Overdue' || a.status === 'Missed';
-}
-
-/**
- * Returns assessments that are eligible for the "Priority Actions" pane.
- * Overdue and missed assessments are excluded — only upcoming (actionable)
- * assessments are kept.
- */
-export function getPriorityAssessments(assessments: Assessment[]): Assessment[] {
-  return assessments.filter(a => !isOverdue(a));
 }
 
 /**
