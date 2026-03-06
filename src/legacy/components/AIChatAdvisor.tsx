@@ -20,7 +20,7 @@
 
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { Module, Assessment, AcademicTerm } from '../../types';
-import { buildAcademicContext, getPriorityAssessments, DANGEROUS_MODULES_PROMPT } from '../services/aiContextBuilder';
+import { buildAcademicContext, DANGEROUS_MODULES_PROMPT } from '../services/aiContextBuilder';
 
 // ---------------------------------------------------------------------------
 // Types
@@ -39,8 +39,6 @@ interface SuggestionPill {
   icon: string;
   /** When true, this pill is disabled when the user has no active module data. */
   requiresData?: boolean;
-  /** When true, overdue/missed assessments are excluded from the AI context. */
-  excludeOverdue?: boolean;
 }
 
 interface Props {
@@ -81,7 +79,6 @@ const SUGGESTION_PILLS: SuggestionPill[] = [
       'Looking at my upcoming assessments as well as my current grades, what is the single most important thing I should work on today and why?',
     icon: '🎯',
     requiresData: true,
-    excludeOverdue: true,
   },
 ];
 
@@ -141,7 +138,6 @@ const AIChatAdvisor: React.FC<Props> = ({ modules, allAssessments, allTerms, stu
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
-  const excludeOverdueRef = useRef(false);
 
   // Scroll to the latest message whenever the list updates.
   useEffect(() => {
@@ -171,7 +167,6 @@ const AIChatAdvisor: React.FC<Props> = ({ modules, allAssessments, allTerms, stu
    * the user can review/edit before sending.
    */
   const handlePillClick = useCallback((pill: SuggestionPill) => {
-    excludeOverdueRef.current = !!pill.excludeOverdue;
     setInputValue(pill.prompt);
     setTimeout(() => {
       inputRef.current?.focus();
@@ -201,11 +196,7 @@ const AIChatAdvisor: React.FC<Props> = ({ modules, allAssessments, allTerms, stu
 
     try {
       // Build the context from current live data every time the user sends.
-      // When the priority-actions pill was used, exclude overdue assessments so
-      // the AI focuses only on upcoming, actionable work.
-      const shouldExcludeOverdue = excludeOverdueRef.current;
-      excludeOverdueRef.current = false;
-      const context = buildAcademicContext(modules, allAssessments, allTerms, studentName, shouldExcludeOverdue);
+      const context = buildAcademicContext(modules, allAssessments, allTerms, studentName);
       const systemPrompt =
         `You are an expert academic advisor embedded in Academic OS. ` +
         `You have full access to the student's current academic data shown below. ` +
